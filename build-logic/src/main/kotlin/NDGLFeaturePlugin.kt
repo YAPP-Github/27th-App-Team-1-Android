@@ -23,6 +23,10 @@ class NDGLFeaturePlugin : Plugin<Project> {
 
 
         dependencies {
+            "implementation"(project(":navigation"))
+            "implementation"(project(":core:ui"))
+            "implementation"(project(":core:util"))
+
             "implementation"(libs.findLibrary("hilt-navigation-compose").get())
             "implementation"(libs.findLibrary("navigation-compose").get())
             "implementation"(libs.findLibrary("lifecycle-viewmodel-compose").get())

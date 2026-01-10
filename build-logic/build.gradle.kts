@@ -1,6 +1,5 @@
 plugins {
     `kotlin-dsl`
-    `kotlin-dsl-precompiled-script-plugins`
 }
 
 dependencies {
@@ -23,9 +22,9 @@ gradlePlugin {
             id = "ndgl.feature"
             implementationClass = "NDGLFeaturePlugin"
         }
-        register("ndglAndroidlibrary") {
+        register("ndglAndroidLibrary") {
             id = "ndgl.android.library"
-            implementationClass = "NDGLAndroidlibraryPlugin"
+            implementationClass = "NDGLAndroidLibraryPlugin"
         }
         register("ndglKotlinLibrary") {
             id = "ndgl.kotlin.library"

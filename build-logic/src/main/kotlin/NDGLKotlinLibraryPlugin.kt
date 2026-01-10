@@ -11,4 +11,3 @@ class NDGLKotlinLibraryPlugin : Plugin<Project> {
         configureKotlinJvm()
     }
 }
-

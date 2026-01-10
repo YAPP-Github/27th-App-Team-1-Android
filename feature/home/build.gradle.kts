@@ -7,8 +7,5 @@ android {
 }
 
 dependencies {
-    implementation(project(":navigation"))
-    implementation(project(":core:ui"))
-    implementation(project(":core:util"))
-    implementation(libs.hilt.navigation.compose)
+    implementation(project(":data:travel"))
 }

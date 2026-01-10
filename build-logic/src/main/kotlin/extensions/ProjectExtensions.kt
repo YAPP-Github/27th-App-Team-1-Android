@@ -4,11 +4,13 @@ import Configuration
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.dependencies
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import util.applicationExtension
 import util.libraryExtension
+import util.libs
 
 internal fun Project.configureAndroidApplication() {
     applicationExtension.apply {
@@ -69,6 +71,10 @@ internal fun Project.configureAndroidLibrary() {
         compilerOptions {
             jvmTarget.set(JvmTarget.fromTarget(Configuration.JVM_TARGET))
         }
+    }
+    
+    dependencies {
+        "implementation"(libs.findLibrary("androidx-core-ktx").get())
     }
 }
 

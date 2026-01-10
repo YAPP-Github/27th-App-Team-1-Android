@@ -7,7 +7,7 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 import util.libs
 
-class NDGLAndroidlibraryPlugin : Plugin<Project> {
+class NDGLAndroidLibraryPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         with(pluginManager) {
             apply("com.android.library")
