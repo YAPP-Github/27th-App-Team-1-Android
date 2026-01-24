@@ -5,10 +5,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -80,7 +80,6 @@ fun NDGLCTAButton(
 
     Row(
         modifier = modifier
-            .wrapContentWidth()
             .height(size.height)
             .clip(RoundedCornerShape(8.dp))
             .background(type.containerColor(status))
@@ -89,7 +88,10 @@ fun NDGLCTAButton(
                 onClick = onClick,
             )
             .padding(horizontal = size.horizontalPadding, vertical = 8.dp),
-        horizontalArrangement = Arrangement.spacedBy(size.horizontalSpacing),
+        horizontalArrangement = Arrangement.spacedBy(
+            space = size.horizontalSpacing,
+            alignment = Alignment.CenterHorizontally,
+        ),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         leadingIcon?.let { icon ->
@@ -124,7 +126,7 @@ private fun NDGLCTAButtonAttr.Type.containerColor(
 ): Color {
     if (status == NDGLCTAButtonAttr.Status.DISABLED) return NDGLTheme.colors.secondary100
     return when (this) {
-        NDGLCTAButtonAttr.Type.PRIMARY -> NDGLTheme.colors.primary500
+        NDGLCTAButtonAttr.Type.PRIMARY -> NDGLTheme.colors.secondary900
         NDGLCTAButtonAttr.Type.SECONDARY -> NDGLTheme.colors.secondary50
         NDGLCTAButtonAttr.Type.DESTRUCTIVE -> NDGLTheme.colors.red50
     }
@@ -162,6 +164,7 @@ private fun NDGLCTAButtonPrimaryLargePreview() {
             label = "Primary Large",
             leadingIcon = R.drawable.ic_24_pin,
             onClick = {},
+            modifier = Modifier.fillMaxWidth(),
         )
     }
 }
