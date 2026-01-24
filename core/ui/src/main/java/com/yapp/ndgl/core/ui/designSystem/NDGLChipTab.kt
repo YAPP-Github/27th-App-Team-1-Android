@@ -1,16 +1,17 @@
 package com.yapp.ndgl.core.ui.designSystem
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -20,6 +21,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.yapp.ndgl.core.ui.theme.NDGLTheme
@@ -30,6 +33,7 @@ object NDGLChipTabAttr {
     data class Tab(
         val tag: String,
         val name: String,
+        @DrawableRes val icon: Int? = null,
     )
 }
 
@@ -50,6 +54,7 @@ fun NDGLChipTab(
             NDGLChipTabItem(
                 isSelected = index == selectedIndex,
                 name = tab.name,
+                icon = tab.icon,
                 onTabSelected = { onTabSelected(index) },
             )
         }
@@ -60,25 +65,36 @@ fun NDGLChipTab(
 private fun NDGLChipTabItem(
     isSelected: Boolean,
     name: String,
+    icon: Int?,
     onTabSelected: () -> Unit,
 ) {
-    Box(
+    val contentColor = if (isSelected) {
+        NDGLTheme.colors.white
+    } else {
+        NDGLTheme.colors.secondary400
+    }
+
+    Row(
         modifier = Modifier
-            .width(72.dp)
             .clip(CircleShape)
             .chipStyle(isSelected)
             .clickable(onClick = onTabSelected)
             .padding(horizontal = 14.dp, vertical = 6.dp),
-        contentAlignment = Alignment.Center,
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
+        icon?.let {
+            Icon(
+                imageVector = ImageVector.vectorResource(it),
+                contentDescription = null,
+                modifier = Modifier.size(20.dp),
+                tint = contentColor,
+            )
+        }
         Text(
             text = name,
             style = NDGLTheme.typography.bodyMdMedium,
-            color = if (isSelected) {
-                NDGLTheme.colors.white
-            } else {
-                NDGLTheme.colors.secondary400
-            },
+            color = contentColor,
         )
     }
 }
