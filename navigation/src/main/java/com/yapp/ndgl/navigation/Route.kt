@@ -15,7 +15,7 @@ sealed interface Route : NavKey {
     data object Travel : Route
 
     @Serializable
-    data class TravelDetail(val travelId: Int) : Route
+    data class FollowTravel(val travelId: Int) : Route
 
     @Serializable
     data object TravelHelper : Route
