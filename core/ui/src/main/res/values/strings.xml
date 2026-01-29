@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="budget_bar_format">%d일차 여행 예산: %s</string>
+    <string name="content_card_info_format">%s • %s • %d박%d일</string>
+    <string name="content_card_budget_format">1인 기준 여행 예산 : %s</string>
+    <string name="content_card_video_summary">영상 요약</string>
+    <string name="day_format">%d일차</string>
+    <string name="follow_travel_button">여행 따라가기</string>
+
+    <!-- Transport Segment -->
+    <string name="transport_segment_format">약 %1$s • %2$s</string>
+    <string name="distance_km">%skm</string>
+    <string name="distance_m">%sm</string>
+</resources>
