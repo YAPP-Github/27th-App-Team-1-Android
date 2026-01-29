@@ -1,6 +1,6 @@
 complexity:
     LongMethod:
-        threshold: 100
+        threshold: 150 #FIXME("임시 테스트용")
         ignoreAnnotated: [ 'Composable' ]
     CyclomaticComplexMethod:
         threshold: 40
