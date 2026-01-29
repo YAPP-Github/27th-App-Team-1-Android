@@ -1,27 +1,32 @@
 package com.yapp.ndgl.feature.travel.navigation
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
 import com.yapp.ndgl.feature.travel.TravelRoute
-import com.yapp.ndgl.feature.travel.detail.TravelDetailRoute
-import com.yapp.ndgl.feature.travel.detail.TravelDetailViewModel
+import com.yapp.ndgl.feature.travel.followtravel.FollowTravelRoute
+import com.yapp.ndgl.feature.travel.followtravel.FollowTravelViewModel
 import com.yapp.ndgl.navigation.Navigator
 import com.yapp.ndgl.navigation.Route
 
-fun EntryProviderScope<NavKey>.travelEntry(navigator: Navigator) {
+fun EntryProviderScope<NavKey>.travelEntry(navigator: Navigator, innerPadding: PaddingValues) {
     entry<Route.Travel> {
         TravelRoute(
-            navigateToDetail = { travelId ->
-                navigator.navigate(Route.TravelDetail(travelId))
+            navigateToFollowTravel = { travelId ->
+                navigator.navigate(Route.FollowTravel(travelId))
             },
+            innerPadding = innerPadding,
         )
     }
-    entry<Route.TravelDetail> { route ->
+    entry<Route.FollowTravel> { route ->
         val viewModel =
-            hiltViewModel<TravelDetailViewModel, TravelDetailViewModel.Factory> { factory ->
+            hiltViewModel<FollowTravelViewModel, FollowTravelViewModel.Factory> { factory ->
                 factory.create(travelId = route.travelId)
             }
-        TravelDetailRoute(viewModel = viewModel)
+        FollowTravelRoute(
+            viewModel = viewModel,
+            navigateBack = { navigator.goBack() },
+        )
     }
 }

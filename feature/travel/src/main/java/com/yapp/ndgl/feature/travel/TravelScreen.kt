@@ -1,7 +1,9 @@
 package com.yapp.ndgl.feature.travel
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -14,7 +16,8 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 
 @Composable
 internal fun TravelRoute(
-    navigateToDetail: (Int) -> Unit,
+    navigateToFollowTravel: (Int) -> Unit,
+    innerPadding: PaddingValues = PaddingValues(),
     viewModel: TravelViewModel = hiltViewModel(),
 ) {
     val state by viewModel.collectAsState()
@@ -22,11 +25,12 @@ internal fun TravelRoute(
     TravelScreen(
         state = state,
         clickTravel = { id -> viewModel.onIntent(TravelIntent.ClickTravel(id)) },
+        innerPadding = innerPadding,
     )
 
     viewModel.collectSideEffect { sideEffect ->
         when (sideEffect) {
-            is TravelSideEffect.NavigateToDetail -> navigateToDetail(sideEffect.travelId)
+            is TravelSideEffect.NavigateToFollowTravel -> navigateToFollowTravel(sideEffect.travelId)
         }
     }
 }
@@ -35,17 +39,17 @@ internal fun TravelRoute(
 private fun TravelScreen(
     state: TravelState = TravelState(),
     clickTravel: (Int) -> Unit = {},
+    innerPadding: PaddingValues,
 ) {
     LazyColumn(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(innerPadding),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         item {
             Text(text = "Travel Screen")
-        }
-        item {
-            Text(text = state.displayText)
         }
         item {
             Button(
@@ -62,5 +66,5 @@ private fun TravelScreen(
 @Preview(showBackground = true)
 @Composable
 private fun TravelScreenPreview() {
-    TravelScreen()
+    TravelScreen(innerPadding = PaddingValues())
 }

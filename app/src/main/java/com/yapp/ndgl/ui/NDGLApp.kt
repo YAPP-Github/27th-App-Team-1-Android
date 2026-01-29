@@ -2,7 +2,6 @@ package com.yapp.ndgl.ui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -26,12 +25,6 @@ fun NDGLApp() {
     )
     val navigator = remember { Navigator(navigationState) }
 
-    val entryProvider = entryProvider {
-        homeEntry(navigator)
-        travelEntry(navigator)
-        travelHelperEntry(navigator)
-    }
-
     val shouldShowBottomBar =
         remember(navigationState.currentKey) { navigationState.currentKey in navigationState.topLevelKeys }
 
@@ -48,10 +41,14 @@ fun NDGLApp() {
             }
         },
     ) { innerPadding ->
+        val entryProvider = entryProvider {
+            homeEntry(navigator, innerPadding)
+            travelEntry(navigator, innerPadding)
+            travelHelperEntry(navigator, innerPadding)
+        }
+
         NavDisplay(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
+            modifier = Modifier.fillMaxSize(),
             onBack = navigator::goBack,
             entries = navigationState.toEntries(entryProvider),
         )
