@@ -1,4 +1,4 @@
-package com.yapp.ndgl.feature.travel
+package com.yapp.ndgl.feature.travel.travel
 
 import com.yapp.ndgl.core.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,11 +13,19 @@ class TravelViewModel @Inject constructor() : BaseViewModel<TravelState, TravelI
             is TravelIntent.ClickTravel -> {
                 clickTravel(intent.travelId)
             }
+            is TravelIntent.ClickTravelDetail -> {
+                clickTravelDetail(intent.travelId)
+            }
         }
     }
 
     private fun clickTravel(travelId: Int) {
         reduce { copy(displayText = "클릭된 id: $travelId") }
         postSideEffect(TravelSideEffect.NavigateToFollowTravel(travelId))
+    }
+
+    private fun clickTravelDetail(travelId: Int) {
+        reduce { copy(displayText = "Travel Detail 클릭된 id: $travelId") }
+        postSideEffect(TravelSideEffect.NavigateToTravelDetail(travelId))
     }
 }

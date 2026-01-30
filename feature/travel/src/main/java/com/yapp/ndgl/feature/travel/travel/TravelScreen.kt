@@ -1,4 +1,4 @@
-package com.yapp.ndgl.feature.travel
+package com.yapp.ndgl.feature.travel.travel
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -17,6 +17,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 @Composable
 internal fun TravelRoute(
     navigateToFollowTravel: (Int) -> Unit,
+    navigateToTravelDetail: (Int) -> Unit,
     innerPadding: PaddingValues = PaddingValues(),
     viewModel: TravelViewModel = hiltViewModel(),
 ) {
@@ -25,12 +26,14 @@ internal fun TravelRoute(
     TravelScreen(
         state = state,
         clickTravel = { id -> viewModel.onIntent(TravelIntent.ClickTravel(id)) },
+        clickTravelDetail = { id -> viewModel.onIntent(TravelIntent.ClickTravelDetail(id)) },
         innerPadding = innerPadding,
     )
 
     viewModel.collectSideEffect { sideEffect ->
         when (sideEffect) {
             is TravelSideEffect.NavigateToFollowTravel -> navigateToFollowTravel(sideEffect.travelId)
+            is TravelSideEffect.NavigateToTravelDetail -> navigateToTravelDetail(sideEffect.travelId)
         }
     }
 }
@@ -39,6 +42,7 @@ internal fun TravelRoute(
 private fun TravelScreen(
     state: TravelState = TravelState(),
     clickTravel: (Int) -> Unit = {},
+    clickTravelDetail: (Int) -> Unit = {},
     innerPadding: PaddingValues,
 ) {
     LazyColumn(
@@ -55,6 +59,15 @@ private fun TravelScreen(
             Button(
                 onClick = {
                     clickTravel(123)
+                },
+            ) {
+                Text(text = "Go to Follow Travel")
+            }
+        }
+        item {
+            Button(
+                onClick = {
+                    clickTravelDetail(456)
                 },
             ) {
                 Text(text = "Go to Travel Detail")

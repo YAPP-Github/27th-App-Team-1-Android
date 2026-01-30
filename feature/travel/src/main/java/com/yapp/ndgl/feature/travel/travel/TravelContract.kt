@@ -1,4 +1,4 @@
-package com.yapp.ndgl.feature.travel
+package com.yapp.ndgl.feature.travel.travel
 
 import com.yapp.ndgl.core.base.UiIntent
 import com.yapp.ndgl.core.base.UiSideEffect
@@ -10,8 +10,10 @@ data class TravelState(
 
 sealed interface TravelIntent : UiIntent {
     data class ClickTravel(val travelId: Int) : TravelIntent
+    data class ClickTravelDetail(val travelId: Int) : TravelIntent
 }
 
 sealed interface TravelSideEffect : UiSideEffect {
     data class NavigateToFollowTravel(val travelId: Int) : TravelSideEffect
+    data class NavigateToTravelDetail(val travelId: Int) : TravelSideEffect
 }
