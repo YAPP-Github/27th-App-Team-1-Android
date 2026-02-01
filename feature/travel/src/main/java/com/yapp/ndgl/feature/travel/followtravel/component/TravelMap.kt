@@ -34,8 +34,8 @@ import com.google.maps.android.compose.Polyline
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.yapp.ndgl.core.ui.theme.NDGLTheme
 import com.yapp.ndgl.core.ui.util.dropShadow
-import com.yapp.ndgl.feature.travel.followtravel.PlaceType
 import com.yapp.ndgl.feature.travel.followtravel.TravelPlace
+import com.yapp.ndgl.feature.travel.followtravel.getColor
 
 @Composable
 internal fun TravelMap(
@@ -130,14 +130,6 @@ internal fun TravelMap(
 private fun PlaceMarker(
     place: TravelPlace,
 ) {
-    val markerColor = when (place.placeType) {
-        PlaceType.ACCOMMODATION -> NDGLTheme.colors.etcPurple
-        PlaceType.RESTAURANT -> NDGLTheme.colors.etcOrange
-        PlaceType.ATTRACTION -> NDGLTheme.colors.etcGreen
-        PlaceType.CAFE -> NDGLTheme.colors.etcOrange
-        PlaceType.TRANSPORT -> NDGLTheme.colors.etcGray
-    }
-
     val markerState = remember(place.id) { MarkerState(position = LatLng(place.latitude, place.longitude)) }
 
     MarkerComposable(
@@ -153,7 +145,7 @@ private fun PlaceMarker(
                     offsetY = 1.dp,
                     blur = 2.dp,
                 )
-                .background(color = markerColor, shape = CircleShape),
+                .background(color = place.placeType.getColor(), shape = CircleShape),
             contentAlignment = Alignment.Center,
         ) {
             Text(

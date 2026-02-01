@@ -11,4 +11,17 @@
     <string name="transport_segment_format">약 %1$s • %2$s</string>
     <string name="distance_km">%skm</string>
     <string name="distance_m">%sm</string>
+
+    <!-- Place Type -->
+    <string name="place_type_accommodation">숙소</string>
+    <string name="place_type_restaurant">음식점</string>
+    <string name="place_type_attraction">관광명소</string>
+    <string name="place_type_cafe">카페</string>
+    <string name="place_type_transport">교통수단</string>
+
+    <!-- Transport Type -->
+    <string name="transport_type_walk">도보</string>
+    <string name="transport_type_car">자동차</string>
+    <string name="transport_type_bus">버스</string>
+    <string name="transport_type_train">기차</string>
 </resources>

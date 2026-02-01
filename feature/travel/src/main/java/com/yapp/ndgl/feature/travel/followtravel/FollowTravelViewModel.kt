@@ -154,16 +154,12 @@ class FollowTravelViewModel @AssistedInject constructor(
 
     override suspend fun handleIntent(intent: FollowTravelIntent) {
         when (intent) {
-            is FollowTravelIntent.OnDaySelected -> {
+            is FollowTravelIntent.SelectDay -> {
                 reduce { copy(selectedDay = intent.day) }
             }
 
-            is FollowTravelIntent.OnFollowClick -> {
+            is FollowTravelIntent.ClickFollowTravel -> {
                 // TODO: Handle follow
-            }
-
-            is FollowTravelIntent.OnPlaceDescriptionClick -> {
-                // TODO: Handle place description
             }
         }
     }
