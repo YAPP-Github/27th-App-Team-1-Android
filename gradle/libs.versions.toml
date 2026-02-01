@@ -42,6 +42,13 @@ firebaseBom = "34.5.0"
 googleServices = "4.4.4"
 firebaseCrashlytics = "3.0.6"
 
+# Google Maps
+mapsCompose = "6.4.1"
+playServicesMaps = "19.1.0"
+
+# Coil
+coil = "2.7.0"
+
 # Other
 timber = "5.0.1"
 desugarJdkLibs = "2.1.5"
@@ -110,6 +117,13 @@ firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.r
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
 firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging" }
+
+# Google Maps
+maps-compose = { group = "com.google.maps.android", name = "maps-compose", version.ref = "mapsCompose" }
+play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
+
+# Coil
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
 # Other
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
