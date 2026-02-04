@@ -5,6 +5,8 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
 import com.yapp.ndgl.feature.travel.TravelRoute
+import com.yapp.ndgl.feature.travel.datepicker.DatePickerRoute
+import com.yapp.ndgl.feature.travel.datepicker.DatePickerViewModel
 import com.yapp.ndgl.feature.travel.followtravel.FollowTravelRoute
 import com.yapp.ndgl.feature.travel.followtravel.FollowTravelViewModel
 import com.yapp.ndgl.navigation.Navigator
@@ -27,6 +29,20 @@ fun EntryProviderScope<NavKey>.travelEntry(navigator: Navigator, innerPadding: P
         FollowTravelRoute(
             viewModel = viewModel,
             navigateBack = { navigator.goBack() },
+            navigateToDatePicker = { tripDays ->
+                navigator.navigate(Route.DatePicker(tripDays))
+            },
+        )
+    }
+    entry<Route.DatePicker> { route ->
+        val viewModel =
+            hiltViewModel<DatePickerViewModel, DatePickerViewModel.Factory> { factory ->
+                factory.create(tripDays = route.tripDays)
+            }
+        DatePickerRoute(
+            viewModel = viewModel,
+            navigateBack = { navigator.goBack() },
+            innerPadding = innerPadding,
         )
     }
 }

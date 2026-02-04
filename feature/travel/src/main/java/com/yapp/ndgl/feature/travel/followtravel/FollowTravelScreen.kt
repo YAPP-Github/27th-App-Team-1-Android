@@ -47,6 +47,7 @@ import kotlinx.collections.immutable.toPersistentList
 internal fun FollowTravelRoute(
     viewModel: FollowTravelViewModel = hiltViewModel(),
     navigateBack: () -> Unit = {},
+    navigateToDatePicker: (Int) -> Unit,
 ) {
     val state by viewModel.collectAsState()
 
@@ -56,7 +57,9 @@ internal fun FollowTravelRoute(
         state = state,
         clickBackButton = navigateBack,
         selectDay = { viewModel.onIntent(FollowTravelIntent.SelectDay(it)) },
-        clickFollowTravel = { viewModel.onIntent(FollowTravelIntent.ClickFollowTravel) },
+        clickFollowTravel = {
+            navigateToDatePicker(state.contentInfo.days)
+        },
     )
 }
 

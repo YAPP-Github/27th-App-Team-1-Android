@@ -104,6 +104,7 @@ data class TransportSegment(
                     String.format(java.util.Locale.getDefault(), "%.1fkm", km)
                 }
             }
+
             else -> "${distance}m"
         }
     }
