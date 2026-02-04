@@ -37,7 +37,6 @@ import com.yapp.ndgl.core.ui.designsystem.NDGLNavigationBarAttr
 import com.yapp.ndgl.core.ui.designsystem.NDGLNavigationIcon
 import com.yapp.ndgl.core.ui.theme.NDGLTheme
 import com.yapp.ndgl.core.ui.util.dropShadow
-import com.yapp.ndgl.feature.travel.followtravel.component.BudgetBar
 import com.yapp.ndgl.feature.travel.followtravel.component.ContentCard
 import com.yapp.ndgl.feature.travel.followtravel.component.PlaceItem
 import com.yapp.ndgl.feature.travel.followtravel.component.TransportSegment
@@ -155,8 +154,6 @@ private fun FollowTravelScreen(
                         .padding(horizontal = 24.dp),
                 ) {
                     state.itineraries.getOrNull(state.selectedDay - 1)?.let { itinerary ->
-                        BudgetBar(day = state.selectedDay, budget = itinerary.budget)
-                        Spacer(Modifier.height(16.dp))
                         val places = itinerary.places
                         if (places.isNotEmpty()) {
                             TravelMap(
