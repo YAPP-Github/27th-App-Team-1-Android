@@ -313,13 +313,34 @@ class TravelDetailViewModel @AssistedInject constructor(
         reduce {
             copy(
                 startTime = duration,
-                endTime = duration + 15.hours,
+                endTime = duration + 15.hours, // FIXME
             )
         }
     }
 
     private fun reorderPlaces(fromIndex: Int, toIndex: Int) {
-        // TODO
+        reduce {
+            val updatedItineraries = tempItineraries.map { itinerary ->
+                val mutablePlaces = itinerary.places.toMutableList()
+
+                if (fromIndex in mutablePlaces.indices && toIndex in mutablePlaces.indices) {
+                    val movedItem = mutablePlaces.removeAt(fromIndex)
+                    mutablePlaces.add(toIndex, movedItem)
+
+                    val reorderedPlaces = mutablePlaces.mapIndexed { index, place ->
+                        place.copy(sequence = index + 1)
+                    }
+
+                    itinerary.copy(
+                        places = reorderedPlaces,
+                    )
+                } else {
+                    itinerary
+                }
+            }
+
+            copy(tempItineraries = updatedItineraries)
+        }
     }
 
     private fun confirmEditMode() {
