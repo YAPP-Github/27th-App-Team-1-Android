@@ -1,5 +1,6 @@
 package com.yapp.ndgl.core.util
 
+import java.util.Locale.getDefault
 import kotlin.time.Duration
 
 fun Duration.formatString(): String {
@@ -10,4 +11,10 @@ fun Duration.formatString(): String {
             else -> "${inWholeMinutes}분"
         }
     }
+}
+
+fun Duration.toTimeString(): String {
+    val hours = this.inWholeHours.toInt()
+    val minutes = (this.inWholeMinutes % 60).toInt()
+    return String.format(getDefault(), "%02d:%02d", hours, minutes)
 }

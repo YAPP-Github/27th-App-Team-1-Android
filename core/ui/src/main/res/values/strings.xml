@@ -6,6 +6,7 @@
     <string name="content_card_video_summary">영상 요약</string>
     <string name="day_format">%d일차</string>
     <string name="follow_travel_button">여행 따라가기</string>
+    <string name="estimated_duration_format">%s 체류 예상</string>
 
     <!-- Transport Segment -->
     <string name="transport_segment_format">약 %1$s • %2$s</string>
@@ -24,4 +25,35 @@
     <string name="transport_type_car">자동차</string>
     <string name="transport_type_bus">버스</string>
     <string name="transport_type_train">기차</string>
+
+    <!-- Travel Detail -->
+    <string name="timeline_auto_setting">타임라인 자동생성</string>
+    <string name="edit_travel">편집하기</string>
+    <string name="edit_done">편집 완료</string>
+    <string name="add_schedule">일정 추가하기</string>
+    <string name="select_all">전체 선택</string>
+    <string name="delete_selected">선택 삭제</string>
+    <string name="no_schedule_message">아직 %d일차 일정이 없어요</string>
+
+    <!-- Dialog - Cancel Edit -->
+    <string name="cancel_edit_dialog_title">편집 중단</string>
+    <string name="cancel_edit_dialog_message">뒤로가면 지금까지 편집한 내용은 저장되지 않습니다.</string>
+    <string name="cancel_edit_dialog_cancel">나가기</string>
+    <string name="cancel_edit_dialog_confirm">계속 편집하기</string>
+
+    <!-- Dialog - Delete Place -->
+    <string name="delete_place_dialog_title">장소 삭제</string>
+    <string name="delete_place_dialog_message">선택한 장소와 관련된 일정 정보가 삭제됩니다.</string>
+    <string name="delete_place_dialog_cancel">취소</string>
+    <string name="delete_place_dialog_confirm">삭제하기</string>
+
+    <!-- Timeline Auto Setting -->
+    <string name="timeline_auto_setting_title">타임라인 자동생성</string>
+    <string name="timeline_start_time">일정 시작 시간</string>
+    <string name="timeline_end_time">일정 마무리 시간</string>
+    <string name="timeline_auto_calculated">자동 계산됨</string>
+    <string name="timeline_set_time">시간 설정하기</string>
+    <string name="timeline_save_time">시간 저장하기</string>
+    <string name="timeline_time_exceeds_warning">* 일정 마무리 시간은 24:00를 넘깁니다\n소요시간, 대중교통 수정을 권장합니다.</string>
+    <string name="close">닫기</string>
 </resources>
