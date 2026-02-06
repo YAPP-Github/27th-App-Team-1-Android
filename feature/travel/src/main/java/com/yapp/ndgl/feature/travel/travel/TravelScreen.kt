@@ -1,7 +1,9 @@
-package com.yapp.ndgl.feature.travel
+package com.yapp.ndgl.feature.travel.travel
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -14,7 +16,9 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 
 @Composable
 internal fun TravelRoute(
-    navigateToDetail: (Int) -> Unit,
+    navigateToFollowTravel: (Int) -> Unit,
+    navigateToTravelDetail: (Int) -> Unit,
+    innerPadding: PaddingValues = PaddingValues(),
     viewModel: TravelViewModel = hiltViewModel(),
 ) {
     val state by viewModel.collectAsState()
@@ -22,11 +26,14 @@ internal fun TravelRoute(
     TravelScreen(
         state = state,
         clickTravel = { id -> viewModel.onIntent(TravelIntent.ClickTravel(id)) },
+        clickTravelDetail = { id -> viewModel.onIntent(TravelIntent.ClickTravelDetail(id)) },
+        innerPadding = innerPadding,
     )
 
     viewModel.collectSideEffect { sideEffect ->
         when (sideEffect) {
-            is TravelSideEffect.NavigateToDetail -> navigateToDetail(sideEffect.travelId)
+            is TravelSideEffect.NavigateToFollowTravel -> navigateToFollowTravel(sideEffect.travelId)
+            is TravelSideEffect.NavigateToTravelDetail -> navigateToTravelDetail(sideEffect.travelId)
         }
     }
 }
@@ -35,9 +42,13 @@ internal fun TravelRoute(
 private fun TravelScreen(
     state: TravelState = TravelState(),
     clickTravel: (Int) -> Unit = {},
+    clickTravelDetail: (Int) -> Unit = {},
+    innerPadding: PaddingValues,
 ) {
     LazyColumn(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(innerPadding),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -45,12 +56,18 @@ private fun TravelScreen(
             Text(text = "Travel Screen")
         }
         item {
-            Text(text = state.displayText)
+            Button(
+                onClick = {
+                    clickTravel(123)
+                },
+            ) {
+                Text(text = "Go to Follow Travel")
+            }
         }
         item {
             Button(
                 onClick = {
-                    clickTravel(123)
+                    clickTravelDetail(456)
                 },
             ) {
                 Text(text = "Go to Travel Detail")
@@ -62,5 +79,5 @@ private fun TravelScreen(
 @Preview(showBackground = true)
 @Composable
 private fun TravelScreenPreview() {
-    TravelScreen()
+    TravelScreen(innerPadding = PaddingValues())
 }
