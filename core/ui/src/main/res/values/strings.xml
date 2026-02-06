@@ -31,6 +31,16 @@
     <string name="transport_type_bus">버스</string>
     <string name="transport_type_train">기차</string>
 
+    <!-- Date Picker -->
+    <string name="date_picker_title">여행 따라가기</string>
+    <string name="date_picker_complete">완료</string>
+    <string name="date_picker_modal_title">여행이 준비됐어요</string>
+    <string name="date_picker_modal_body">이제 선택한 여행을\n그대로 따라갈 수 있어요.</string>
+    <string name="date_picker_modal_negative">나중에</string>
+    <string name="date_picker_modal_positive">여행 보러가기</string>
+    <string name="date_picker_year_month_format">%1$d년 %2$d월</string>
+    <string name="date_picker_error_insufficient">* 선택한 여행 기간이 따라가기 일정보다 짧아요.\n 기간을 넘는 일정은 지정되지 않습니다.</string>
+
     <!-- Travel Detail -->
     <string name="timeline_auto_setting">타임라인 자동생성</string>
     <string name="edit_travel">편집하기</string>
