@@ -48,7 +48,7 @@ mapsCompose = "6.4.1"
 playServicesMaps = "19.1.0"
 
 # Coil
-coil = "2.7.0"
+coil = "3.1.0"
 
 # Other
 timber = "5.0.1"
@@ -112,7 +112,6 @@ kotlin-bom = { group = "org.jetbrains.kotlin", name = "kotlin-bom", version.ref 
 
 # KotlinX
 kotlinx-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinxImmutable" }
-kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
 
 # Firebase
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
@@ -125,7 +124,8 @@ maps-compose = { group = "com.google.maps.android", name = "maps-compose", versi
 play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
 
 # Coil
-coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
+coil-network-okhttp = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil" }
 
 # Other
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }

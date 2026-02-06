@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- MyTravelCardSection -->
+    <string name="home_my_travel_card_empty_title">아직 등록된 여행지가 없어요</string>
+    <string name="home_my_travel_card_empty_description">새 여행 일정을 만들어 보세요!</string>
+    <string name="home_my_travel_card_travel_duration">%s~%s</string>
+    <string name="home_my_travel_card_date_format">M월 d일</string>
+    <string name="home_my_travel_card_in_progress_title">%1$s %2$d일차 입니다!</string>
+    <string name="home_my_travel_card_d_day_minus">D%d</string>
+    <string name="home_my_travel_card_d_day_plus">D+%d</string>
+
+    <!-- PopularTravelSection -->
+    <string name="home_popular_travel_section_title">인기 여행 따라가기</string>
+    <string name="home_popular_travel_more_button">여행 따라가기 더 보기</string>
+    <string name="home_popular_travel_nights_days">%1$d박 %2$d일</string>
+
+    <!-- RecommendedContentSection -->
+    <string name="home_recommended_content_section_title">%s님께 추천하는\n따라가기 여행 콘텐츠에요!</string>
+
+    <!-- Common -->
+    <string name="home_common_dot_separator">•</string>
+</resources>

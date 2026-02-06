@@ -10,7 +10,13 @@ class NDGLApplication : Application() {
         super.onCreate()
 
         if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
+            Timber.plant(
+                object : Timber.DebugTree() {
+                    override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
+                        super.log(priority, "Debug[$tag]", message, t)
+                    }
+                },
+            )
         }
     }
 }
