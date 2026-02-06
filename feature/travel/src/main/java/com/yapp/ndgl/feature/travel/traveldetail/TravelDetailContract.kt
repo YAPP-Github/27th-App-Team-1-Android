@@ -25,6 +25,8 @@ data class TravelDetailState(
     val showTimelineBottomSheet: Boolean = false,
     val startTime: Duration = 0.hours,
     val endTime: Duration = 0.hours,
+    val selectedPlace: TravelPlace? = null,
+    val showPlaceBottomSheet: Boolean = false,
 ) : UiState
 
 data class ContentInfo(
@@ -146,8 +148,17 @@ sealed interface TravelDetailIntent : UiIntent {
     data class ConfirmTimelineSetting(val startTime: Duration) : TravelDetailIntent
     data class ReorderPlaces(val fromIndex: Int, val toIndex: Int) : TravelDetailIntent
     data object ConfirmEditMode : TravelDetailIntent
+    data class ClickPlaceItem(val place: TravelPlace) : TravelDetailIntent
+    data class ClickAddTime(val placeId: Int) : TravelDetailIntent
+    data class ClickAddCost(val placeId: Int) : TravelDetailIntent
+    data class ClickAddMemo(val placeId: Int) : TravelDetailIntent
+    data class ClickFindRoute(val googleMapsUri: String) : TravelDetailIntent
+    data object DismissPlaceBottomSheet : TravelDetailIntent
+    data class NavigateToPlaceDetail(val placeId: String) : TravelDetailIntent
 }
 
 sealed interface TravelDetailSideEffect : UiSideEffect {
     data object NavigateBack : TravelDetailSideEffect
+    data class NavigateToPlaceDetail(val placeId: String) : TravelDetailSideEffect
+    data class NavigateToBrowser(val url: String) : TravelDetailSideEffect
 }

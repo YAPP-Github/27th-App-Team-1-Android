@@ -33,6 +33,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -50,9 +51,11 @@ import com.yapp.ndgl.core.ui.designsystem.NDGLNavigationBarAttr
 import com.yapp.ndgl.core.ui.designsystem.NDGLNavigationIcon
 import com.yapp.ndgl.core.ui.theme.NDGLTheme
 import com.yapp.ndgl.core.ui.util.dropShadow
+import com.yapp.ndgl.core.ui.util.launchBrowser
 import com.yapp.ndgl.feature.travel.traveldetail.component.ContentCard
 import com.yapp.ndgl.feature.travel.traveldetail.component.EditControlBar
 import com.yapp.ndgl.feature.travel.traveldetail.component.EditablePlaceItem
+import com.yapp.ndgl.feature.travel.traveldetail.component.PlaceBottomSheet
 import com.yapp.ndgl.feature.travel.traveldetail.component.PlaceItem
 import com.yapp.ndgl.feature.travel.traveldetail.component.TimelineContent
 import com.yapp.ndgl.feature.travel.traveldetail.component.TransportSegment
@@ -66,12 +69,21 @@ import kotlin.time.Duration.Companion.minutes
 internal fun TravelDetailRoute(
     viewModel: TravelDetailViewModel = hiltViewModel(),
     navigateBack: () -> Unit,
+    navigateToPlaceDetail: (String) -> Unit,
 ) {
     val state by viewModel.collectAsState()
+    val context = LocalContext.current
 
     viewModel.collectSideEffect { sideEffect ->
         when (sideEffect) {
             is TravelDetailSideEffect.NavigateBack -> navigateBack()
+            is TravelDetailSideEffect.NavigateToPlaceDetail -> {
+                navigateToPlaceDetail(sideEffect.placeId)
+            }
+
+            is TravelDetailSideEffect.NavigateToBrowser -> {
+                context.launchBrowser(sideEffect.url)
+            }
         }
     }
 
@@ -96,6 +108,13 @@ internal fun TravelDetailRoute(
         confirmTimelineSetting = { startTime -> viewModel.onIntent(TravelDetailIntent.ConfirmTimelineSetting(startTime)) },
         reorderPlaces = { fromIndex, toIndex -> viewModel.onIntent(TravelDetailIntent.ReorderPlaces(fromIndex, toIndex)) },
         confirmEditMode = { viewModel.onIntent(TravelDetailIntent.ConfirmEditMode) },
+        clickPlaceItem = { viewModel.onIntent(TravelDetailIntent.ClickPlaceItem(it)) },
+        dismissPlaceBottomSheet = { viewModel.onIntent(TravelDetailIntent.DismissPlaceBottomSheet) },
+        navigateToPlaceDetail = { viewModel.onIntent(TravelDetailIntent.NavigateToPlaceDetail(it)) },
+        clickAddTime = { viewModel.onIntent(TravelDetailIntent.ClickAddTime(it)) },
+        clickAddMemo = { viewModel.onIntent(TravelDetailIntent.ClickAddMemo(it)) },
+        clickAddCost = { viewModel.onIntent(TravelDetailIntent.ClickAddCost(it)) },
+        clickFindRoute = { viewModel.onIntent(TravelDetailIntent.ClickFindRoute(it)) },
     )
 }
 
@@ -119,6 +138,13 @@ private fun TravelDetailScreen(
     confirmTimelineSetting: (Duration) -> Unit,
     reorderPlaces: (Int, Int) -> Unit,
     confirmEditMode: () -> Unit,
+    clickPlaceItem: (TravelPlace) -> Unit,
+    clickAddTime: (Int) -> Unit,
+    clickAddMemo: (Int) -> Unit,
+    clickAddCost: (Int) -> Unit,
+    clickFindRoute: (String) -> Unit,
+    dismissPlaceBottomSheet: () -> Unit,
+    navigateToPlaceDetail: (String) -> Unit,
 ) {
     BackHandler(enabled = state.isEditMode) {
         clickBack()
@@ -278,7 +304,7 @@ private fun TravelDetailScreen(
                                 Box(modifier = Modifier.padding(horizontal = 24.dp)) {
                                     PlaceItem(
                                         place = place,
-                                        onClick = {},
+                                        onClick = { clickPlaceItem(place) },
                                         onLongClick = longClickPlaceItem,
                                     )
                                 }
@@ -393,6 +419,19 @@ private fun TravelDetailScreen(
                 )
             }
         }
+
+        if (state.showPlaceBottomSheet && state.selectedPlace != null) {
+            // FIXME
+            PlaceBottomSheet(
+                place = state.selectedPlace,
+                onDismiss = dismissPlaceBottomSheet,
+                navigateToPlaceDetail = { navigateToPlaceDetail(state.selectedPlace.googlePlaceId) },
+                onAddTimeClick = clickAddTime,
+                onAddCostClick = clickAddCost,
+                onAddMemoClick = clickAddMemo,
+                onFindRouteClick = clickFindRoute,
+            )
+        }
     }
 }
 
@@ -483,6 +522,13 @@ private fun TravelDetailScreenPreview() {
             confirmTimelineSetting = {},
             reorderPlaces = { _, _ -> },
             confirmEditMode = {},
+            clickPlaceItem = {},
+            clickAddTime = {},
+            clickAddMemo = {},
+            clickAddCost = {},
+            clickFindRoute = {},
+            dismissPlaceBottomSheet = {},
+            navigateToPlaceDetail = {},
         )
     }
 }
@@ -574,6 +620,13 @@ private fun TravelDetailScreenEditModePreview() {
             confirmTimelineSetting = {},
             reorderPlaces = { _, _ -> },
             confirmEditMode = {},
+            clickPlaceItem = {},
+            clickAddTime = {},
+            clickAddMemo = {},
+            clickAddCost = {},
+            clickFindRoute = {},
+            dismissPlaceBottomSheet = {},
+            navigateToPlaceDetail = {},
         )
     }
 }

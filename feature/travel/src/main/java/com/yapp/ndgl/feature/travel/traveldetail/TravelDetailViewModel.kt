@@ -182,6 +182,13 @@ class TravelDetailViewModel @AssistedInject constructor(
             is TravelDetailIntent.ConfirmTimelineSetting -> confirmTimelineSetting(intent.startTime)
             is TravelDetailIntent.ReorderPlaces -> reorderPlaces(intent.fromIndex, intent.toIndex)
             is TravelDetailIntent.ConfirmEditMode -> confirmEditMode()
+            is TravelDetailIntent.ClickPlaceItem -> clickPlaceItem(intent.place)
+            is TravelDetailIntent.DismissPlaceBottomSheet -> dismissPlaceBottomSheet()
+            is TravelDetailIntent.NavigateToPlaceDetail -> navigateToPlaceDetail(intent.placeId)
+            is TravelDetailIntent.ClickAddTime -> clickAddTime()
+            is TravelDetailIntent.ClickAddCost -> clickAddCost()
+            is TravelDetailIntent.ClickAddMemo -> clickAddMemo()
+            is TravelDetailIntent.ClickFindRoute -> clickFindRoute(intent.googleMapsUri)
         }
     }
 
@@ -351,6 +358,50 @@ class TravelDetailViewModel @AssistedInject constructor(
                 selectedPlaceIds = emptySet(),
             )
         }
+    }
+
+    private fun clickPlaceItem(place: TravelPlace) {
+        reduce {
+            copy(
+                showPlaceBottomSheet = true,
+                selectedPlace = place,
+            )
+        }
+    }
+
+    private fun dismissPlaceBottomSheet() {
+        reduce {
+            copy(
+                showPlaceBottomSheet = false,
+                selectedPlace = null,
+            )
+        }
+    }
+
+    private fun navigateToPlaceDetail(placeId: String) {
+        postSideEffect(TravelDetailSideEffect.NavigateToPlaceDetail(placeId))
+        reduce {
+            copy(
+                showPlaceBottomSheet = false,
+                selectedPlace = null,
+            )
+        }
+    }
+
+    private fun clickAddTime() {
+        // TODO
+    }
+
+    private fun clickAddCost() {
+        // TODO
+    }
+
+    private fun clickAddMemo() {
+        // TODO
+    }
+
+    private fun clickFindRoute(url: String) {
+        postSideEffect(TravelDetailSideEffect.NavigateToBrowser(url))
     }
 
     @AssistedFactory
