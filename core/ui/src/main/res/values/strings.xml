@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Common -->
     <string name="budget_bar_format">%d일차 여행 예산: %s</string>
     <string name="content_card_info_format">%s • %s • %d박%d일</string>
     <string name="content_card_budget_format">1인 기준 여행 예산 : %s</string>
@@ -7,6 +8,10 @@
     <string name="day_format">%d일차</string>
     <string name="follow_travel_button">여행 따라가기</string>
     <string name="estimated_duration_format">%s 체류 예상</string>
+    <string name="opening_hours_format">영업시간 %s</string>
+    <string name="find_route">길찾기</string>
+    <string name="add_cost">비용 추가</string>
+    <string name="add_time">시간 추가</string>
 
     <!-- Transport Segment -->
     <string name="transport_segment_format">약 %1$s • %2$s</string>
@@ -56,4 +61,20 @@
     <string name="timeline_save_time">시간 저장하기</string>
     <string name="timeline_time_exceeds_warning">* 일정 마무리 시간은 24:00를 넘깁니다\n소요시간, 대중교통 수정을 권장합니다.</string>
     <string name="close">닫기</string>
+
+    <!-- Place Detail -->
+    <string name="place_detail_tab_info">정보</string>
+    <string name="place_detail_tab_photo">사진</string>
+    <string name="place_detail_add_schedule">일정 추가하기</string>
+    <string name="place_detail_website">웹사이트 보기</string>
+    <string name="place_detail_menu">메뉴</string>
+    <string name="place_detail_plan_b_message">아래에서 플랜 B를 알아봐요!</string>
+    <string name="place_detail_content_tip">콘텐츠 속 꿀팁</string>
+    <string name="place_detail_creator_tip_format">%s의 꿀팁</string>
+    <string name="place_detail_change_place">장소 변경하기</string>
+    <string name="place_detail_modal_change_title">장소 변경</string>
+    <string name="place_detail_modal_change_body">장소를 다음과 같이 변경할까요?</string>
+    <string name="place_detail_modal_change_description">%s -> %s</string>
+    <string name="place_detail_modal_change_confirm">변경하기</string>
+    <string name="place_detail_modal_change_cancel">아니요</string>
 </resources>
