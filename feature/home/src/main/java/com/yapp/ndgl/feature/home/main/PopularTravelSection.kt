@@ -1,5 +1,6 @@
 package com.yapp.ndgl.feature.home.main
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -39,6 +40,7 @@ internal fun PopularTravelSection(
     selectedTabIndex: Int,
     travelsByTab: Map<String, List<TravelSummary>>,
     onTabSelected: (Int) -> Unit,
+    navigateToFollowTravel: () -> Unit,
 ) {
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -58,6 +60,7 @@ internal fun PopularTravelSection(
             selectedTabIndex = selectedTabIndex,
             travelsByTab = travelsByTab,
             onTabSelected = onTabSelected,
+            navigateToFollowTravel = navigateToFollowTravel,
         )
 
         NDGLOutlinedButton(
@@ -78,6 +81,7 @@ private fun HorizontalCardSection(
     travelsByTab: Map<String, List<TravelSummary>>,
     onTabSelected: (Int) -> Unit,
     modifier: Modifier = Modifier,
+    navigateToFollowTravel: () -> Unit,
 ) {
     val pagerState = rememberPagerState(
         initialPage = selectedTabIndex,
@@ -112,7 +116,7 @@ private fun HorizontalCardSection(
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 travels.take(3).forEach { travel ->
-                    PopularTravelItem(travel = travel)
+                    PopularTravelItem(travel = travel, navigateToFollowTravel = navigateToFollowTravel)
                 }
             }
         }
@@ -131,10 +135,14 @@ private fun HorizontalCardSection(
 
 @Composable
 private fun PopularTravelItem(
+    navigateToFollowTravel: () -> Unit,
     travel: TravelSummary,
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(4.dp))
+            .clickable { navigateToFollowTravel() },
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalAlignment = Alignment.Top,
     ) {

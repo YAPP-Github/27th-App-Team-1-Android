@@ -33,7 +33,7 @@ class FollowTravelViewModel @AssistedInject constructor(
                     city = "방콕",
                     budgetPerPerson = Budget(1200000),
                     nights = 3,
-                    days = 4,
+                    days = 2,
                     videoInfo = VideoInfo(
                         title = "방콕 풀코스, 동남아 안 가본 곽튜브와 함께 【방콕】",
                         name = "빠니보틀",

@@ -9,6 +9,6 @@ import com.yapp.ndgl.navigation.Route
 
 fun EntryProviderScope<NavKey>.homeEntry(navigator: Navigator, innerPadding: PaddingValues) {
     entry<Route.Home> {
-        HomeRoute(innerPadding = innerPadding)
+        HomeRoute(innerPadding = innerPadding, navigateToFollowTravel = { navigator.navigate(Route.FollowTravel(1)) })
     }
 }

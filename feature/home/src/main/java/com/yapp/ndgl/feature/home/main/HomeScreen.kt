@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -24,10 +25,14 @@ import java.time.LocalDate
 @Composable
 internal fun HomeRoute(
     viewModel: HomeViewModel = hiltViewModel(),
+    navigateToFollowTravel: () -> Unit,
+    innerPadding: PaddingValues,
 ) {
     val state by viewModel.collectAsState()
     HomeScreen(
         state = state,
+        innerPadding = innerPadding,
+        navigateToFollowTravel = navigateToFollowTravel,
         onTabSelected = { index ->
             viewModel.onIntent(HomeIntent.SelectPopularTravelTab(index))
         },
@@ -37,9 +42,12 @@ internal fun HomeRoute(
 @Composable
 private fun HomeScreen(
     state: HomeState = HomeState(),
+    innerPadding: PaddingValues = PaddingValues(),
+    navigateToFollowTravel: () -> Unit,
     onTabSelected: (Int) -> Unit = {},
 ) {
     Scaffold(
+        modifier = Modifier.padding(innerPadding),
         topBar = {
             NDGLNavigationBar(
                 textAlignType = NDGLNavigationBarAttr.TextAlignType.START,
@@ -81,6 +89,7 @@ private fun HomeScreen(
                         selectedTabIndex = state.popularTravelSelectedTabIndex,
                         travelsByTab = state.popularTravelsByTab,
                         onTabSelected = onTabSelected,
+                        navigateToFollowTravel = navigateToFollowTravel,
                     )
                 }
             }
@@ -168,6 +177,7 @@ private fun HomeScreenPreview() {
                 ),
                 recommendedContents = sampleTravels.take(2),
             ),
+            navigateToFollowTravel = {},
         )
     }
 }

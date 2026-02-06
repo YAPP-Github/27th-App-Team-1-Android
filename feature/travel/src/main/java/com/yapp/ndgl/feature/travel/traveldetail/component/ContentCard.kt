@@ -42,7 +42,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
+import coil3.compose.AsyncImage
 import com.yapp.ndgl.core.ui.R
 import com.yapp.ndgl.core.ui.theme.NDGLTheme
 import com.yapp.ndgl.feature.travel.traveldetail.Budget
@@ -164,7 +164,7 @@ fun ContentCard(contentInfo: ContentInfo) {
                             Icon(
                                 imageVector = ImageVector.vectorResource(R.drawable.ic_20_piggybank),
                                 contentDescription = null,
-                                tint = NDGLTheme.colors.etcBlue,
+                                tint = NDGLTheme.colors.green500,
                                 modifier = Modifier.size(20.dp),
                             )
                             Text(
@@ -172,7 +172,7 @@ fun ContentCard(contentInfo: ContentInfo) {
                                     R.string.content_card_budget_format,
                                     contentInfo.budgetPerPerson.formatString(),
                                 ),
-                                color = NDGLTheme.colors.etcBlue,
+                                color = NDGLTheme.colors.green500,
                                 style = NDGLTheme.typography.bodyMdSemiBold,
                             )
                         }
@@ -189,7 +189,7 @@ fun ContentCard(contentInfo: ContentInfo) {
                             Text(
                                 text = stringResource(R.string.content_card_video_summary),
                                 color = NDGLTheme.colors.black700,
-                                style = NDGLTheme.typography.subtitleSmSemiBold,
+                                style = NDGLTheme.typography.bodyLgSemiBold,
                             )
                         }
                         Spacer(modifier = Modifier.height(8.dp))

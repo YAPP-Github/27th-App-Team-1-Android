@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
-import com.yapp.ndgl.feature.travel.TravelRoute
 import com.yapp.ndgl.feature.travel.datepicker.DatePickerRoute
 import com.yapp.ndgl.feature.travel.datepicker.DatePickerViewModel
 import com.yapp.ndgl.feature.travel.followtravel.FollowTravelRoute
@@ -37,6 +36,9 @@ fun EntryProviderScope<NavKey>.travelEntry(navigator: Navigator, innerPadding: P
         FollowTravelRoute(
             viewModel = viewModel,
             navigateBack = { navigator.goBack() },
+            navigateToDatePicker = { tripDays ->
+                navigator.navigate(Route.DatePicker(tripDays))
+            },
         )
     }
     entry<Route.TravelDetail> { route ->
@@ -61,9 +63,6 @@ fun EntryProviderScope<NavKey>.travelEntry(navigator: Navigator, innerPadding: P
             viewModel = viewModel,
             innerPadding = innerPadding,
             navigateBack = { navigator.goBack() },
-            navigateToDatePicker = { tripDays ->
-                navigator.navigate(Route.DatePicker(tripDays))
-            },
         )
     }
     entry<Route.DatePicker> { route ->

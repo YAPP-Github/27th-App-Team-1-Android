@@ -53,7 +53,7 @@ private fun TravelScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         item {
-            Text(text = "Travel Screen")
+            Text(text = "내 여행 화면 제작중입니다. 감사합니다.\n")
         }
         item {
             Button(
@@ -61,7 +61,7 @@ private fun TravelScreen(
                     clickTravel(123)
                 },
             ) {
-                Text(text = "Go to Follow Travel")
+                Text(text = "여행 콘텐츠 따라가기")
             }
         }
         item {
@@ -70,7 +70,7 @@ private fun TravelScreen(
                     clickTravelDetail(456)
                 },
             ) {
-                Text(text = "Go to Travel Detail")
+                Text(text = "내 여행 보러가기")
             }
         }
     }
