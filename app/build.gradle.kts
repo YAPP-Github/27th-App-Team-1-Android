@@ -20,11 +20,22 @@ android {
     }
 
     signingConfigs {
+        getByName("debug") {
+            storeFile = rootProject.file("keystore/debug.keystore")
+            storePassword = localProperties.getProperty("KEYSTORE_STORE_PASSWORD", "")
+            keyAlias = localProperties.getProperty("KEYSTORE_ALIAS", "")
+            keyPassword = localProperties.getProperty("KEYSTORE_KEY_PASSWORD", "")
+        }
         create("release") {
-            storeFile = file(localProperties.getProperty("KEYSTORE_PATH"))
-            storePassword = localProperties.getProperty("KEYSTORE_STORE_PASSWORD")
-            keyAlias = localProperties.getProperty("KEYSTORE_ALIAS")
-            keyPassword = localProperties.getProperty("KEYSTORE_KEY_PASSWORD")
+            val keystoreFile = rootProject.file("keystore/release.jks")
+            storeFile = if (keystoreFile.exists()) {
+                keystoreFile
+            } else {
+                file(localProperties.getProperty("KEYSTORE_PATH", ""))
+            }
+            storePassword = localProperties.getProperty("KEYSTORE_STORE_PASSWORD", "")
+            keyAlias = localProperties.getProperty("KEYSTORE_ALIAS", "")
+            keyPassword = localProperties.getProperty("KEYSTORE_KEY_PASSWORD", "")
         }
     }
 
@@ -41,6 +52,7 @@ android {
             buildConfigField("String", "NDGL_API_KEY", "\"${localProperties.getProperty("NDGL_API_KEY", "")}\"")
         }
         debug {
+            signingConfig = signingConfigs.getByName("debug")
             applicationIdSuffix = ".debug"
             isDebuggable = true
             isMinifyEnabled = false

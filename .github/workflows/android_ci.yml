@@ -22,8 +22,9 @@ jobs:
 
       - name: Set up keystore
         run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > app/ndgl.keystore
-          echo "KEYSTORE_PATH=../app/ndgl.keystore" >> local.properties
+          mkdir -p keystore
+          echo "${{ secrets.KEYSTORE_DEBUG_BASE64 }}" | base64 -d > keystore/debug.keystore
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > keystore/release.jks
           echo "KEYSTORE_STORE_PASSWORD=${{ secrets.KEYSTORE_STORE_PASSWORD }}" >> local.properties
           echo "KEYSTORE_ALIAS=${{ secrets.KEYSTORE_ALIAS }}" >> local.properties
           echo "KEYSTORE_KEY_PASSWORD=${{ secrets.KEYSTORE_KEY_PASSWORD }}" >> local.properties
@@ -43,7 +44,8 @@ jobs:
           retention-days: 1
           path: |
             local.properties
-            app/ndgl.keystore
+            keystore/debug.keystore
+            keystore/release.jks
             app/src/debug/google-services.json
             app/src/release/google-services.json
 
