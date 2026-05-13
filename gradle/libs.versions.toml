@@ -67,7 +67,7 @@ espressoCore = "3.7.0"
 uiautomator = "2.3.0"
 benchmarkMacroJunit4 = "1.4.1"
 baselineprofile = "1.2.4"
-profileinstaller = "1.4.1" #https://github.com/pinterest/ktlint/releases
+profileinstaller = "1.4.1"
 
 [libraries]
 # AndroidX
