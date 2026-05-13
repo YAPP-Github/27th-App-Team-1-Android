@@ -29,6 +29,10 @@ data class SettingsState(
             override val labelRes = R.string.home_settings_identification_code
         }
 
+        data object ContentRecommendation : SettingsMenu {
+            override val labelRes = R.string.home_settings_recommend_link
+        }
+
         data class AppVersion(
             val versionName: String,
         ) : SettingsMenu {
@@ -44,10 +48,6 @@ data class SettingsState(
             labelRes = R.string.home_settings_faq,
             url = "https://repeated-tapir-33f.notion.site/FAQ-30ccbdc5a38380d6af4af7b7c412921e?source=copy_link",
         ),
-        RECOMMEND_LINK(
-            labelRes = R.string.home_settings_recommend_link,
-            url = "https://forms.gle/3q1uhQVeeKRrz11y5",
-        ),
         TERMS_OF_SERVICE(
             labelRes = R.string.home_settings_terms_of_service,
             url = "https://repeated-tapir-33f.notion.site/2c8cbdc5a3838070a8d8ccdcd0631c9a?source=copy_link",
@@ -62,9 +62,11 @@ data class SettingsState(
 sealed interface SettingsIntent : UiIntent {
     data class ClickUrlMenu(val menu: UrlMenu) : SettingsIntent
     data object ClickCopyIdentifierCodeMenu : SettingsIntent
+    data object ClickContentRecommendationMenu : SettingsIntent
 }
 
 sealed interface SettingsSideEffect : UiSideEffect {
     data class OpenUrl(val url: String) : SettingsSideEffect
     data class CopyIdentifierCode(val code: String) : SettingsSideEffect
+    data object NavigateToContentRecommendation : SettingsSideEffect
 }

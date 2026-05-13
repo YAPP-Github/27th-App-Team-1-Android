@@ -65,4 +65,7 @@ sealed interface Route : NavKey {
 
     @Serializable
     data object TravelHelper : Route
+
+    @Serializable
+    data object ContentRecommendation : Route
 }

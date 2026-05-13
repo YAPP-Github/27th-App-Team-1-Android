@@ -18,7 +18,7 @@ class SettingsViewModel @Inject constructor(
     initialState = SettingsState(
         menuItems = persistentListOf(
             SettingsMenu.OpenUrl(SettingsState.UrlMenu.FAQ),
-            SettingsMenu.OpenUrl(SettingsState.UrlMenu.RECOMMEND_LINK),
+            SettingsMenu.ContentRecommendation,
             SettingsMenu.CopyIdentifierCode,
             SettingsMenu.OpenUrl(SettingsState.UrlMenu.TERMS_OF_SERVICE),
             SettingsMenu.OpenUrl(SettingsState.UrlMenu.PRIVACY_POLICY),
@@ -30,6 +30,9 @@ class SettingsViewModel @Inject constructor(
         when (intent) {
             is SettingsIntent.ClickUrlMenu -> postOpenUrl(intent.menu)
             SettingsIntent.ClickCopyIdentifierCodeMenu -> postCopyIdentifierCode()
+            SettingsIntent.ClickContentRecommendationMenu -> {
+                postSideEffect(SettingsSideEffect.NavigateToContentRecommendation)
+            }
         }
     }
 

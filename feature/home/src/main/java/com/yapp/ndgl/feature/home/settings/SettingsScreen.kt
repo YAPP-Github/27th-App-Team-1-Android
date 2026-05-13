@@ -40,6 +40,7 @@ import com.yapp.ndgl.core.ui.R as CoreR
 internal fun SettingsRoute(
     viewModel: SettingsViewModel = hiltViewModel(),
     goBack: () -> Unit,
+    navigateToContentRecommendation: () -> Unit,
 ) {
     val context = LocalContext.current
 
@@ -54,6 +55,9 @@ internal fun SettingsRoute(
         onCopyIdentifierCodeClick = {
             viewModel.onIntent(SettingsIntent.ClickCopyIdentifierCodeMenu)
         },
+        onContentRecommendationClick = {
+            viewModel.onIntent(SettingsIntent.ClickContentRecommendationMenu)
+        },
     )
 
     viewModel.collectSideEffect { sideEffect ->
@@ -67,6 +71,7 @@ internal fun SettingsRoute(
                 )
                 clipboard?.setPrimaryClip(clip)
             }
+            SettingsSideEffect.NavigateToContentRecommendation -> navigateToContentRecommendation()
         }
     }
 }
@@ -77,6 +82,7 @@ private fun SettingsScreen(
     goBack: () -> Unit,
     onUrlItemClick: (SettingsState.UrlMenu) -> Unit,
     onCopyIdentifierCodeClick: () -> Unit,
+    onContentRecommendationClick: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -111,6 +117,11 @@ private fun SettingsScreen(
                     SettingsMenu.CopyIdentifierCode -> SettingsMenuItem(
                         text = stringResource(item.labelRes),
                         onClick = onCopyIdentifierCodeClick,
+                    )
+
+                    SettingsMenu.ContentRecommendation -> SettingsMenuItem(
+                        text = stringResource(item.labelRes),
+                        onClick = onContentRecommendationClick,
                     )
 
                     is SettingsMenu.AppVersion -> VersionItem(versionName = item.versionName)

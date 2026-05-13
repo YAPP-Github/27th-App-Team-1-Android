@@ -64,6 +64,7 @@ dependencies {
     implementation(project(":feature:home"))
     implementation(project(":feature:travel"))
     implementation(project(":feature:travel-helper"))
+    implementation(project(":feature:content-recommendation"))
 
     implementation(project(":data:core"))
 

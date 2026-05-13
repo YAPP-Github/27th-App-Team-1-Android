@@ -62,6 +62,9 @@ fun EntryProviderScope<NavKey>.homeEntry(
             goBack = {
                 navigator.goBack()
             },
+            navigateToContentRecommendation = {
+                navigator.navigate(Route.ContentRecommendation)
+            },
         )
     }
 }

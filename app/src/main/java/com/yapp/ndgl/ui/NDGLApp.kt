@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
+import com.yapp.ndgl.feature.contentrecommendation.navigation.contentRecommendationEntry
 import com.yapp.ndgl.feature.home.navigation.homeEntry
 import com.yapp.ndgl.feature.travel.navigation.travelEntry
 import com.yapp.ndgl.feature.travelhelper.navigation.travelHelperEntry
@@ -33,6 +34,7 @@ fun NDGLApp() {
             homeEntry(navigator)
             travelEntry(navigator)
             travelHelperEntry(navigator)
+            contentRecommendationEntry(navigator)
         }
 
         NavDisplay(

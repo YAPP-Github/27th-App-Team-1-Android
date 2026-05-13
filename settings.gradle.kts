@@ -28,11 +28,15 @@ include(":navigation")
 include(":core:base")
 include(":core:ui")
 include(":core:util")
+
 include(":feature:home")
 include(":feature:travel")
 include(":feature:travel-helper")
 include(":feature:splash")
+include(":feature:content-recommendation")
+
 include(":data:core")
 include(":data:auth")
 include(":data:travel")
+
 include(":baselineprofile")
